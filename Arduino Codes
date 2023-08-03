@@ -1,0 +1,22 @@
+void setup()
+{
+    // Initialize the Serial communication at a baud rate of 115200
+    Serial.begin(115200);
+
+    // Wait until a Serial connection is established (only required for native USB)
+    while (!Serial);
+
+#ifdef VERBOSE_OUTPUT // Check if VERBOSE_OUTPUT is defined to display additional information
+    // Print a welcome message for the Edge Impulse Inferencing Demo
+    Serial.println("Edge Impulse Inferencing Demo");
+
+    // Display a summary of the inferencing settings (from model_metadata.h)
+    ei_printf("Inferencing settings:\n");
+    // Print the image resolution used by the classifier
+    ei_printf("\tImage resolution: %dx%d\n", EI_CLASSIFIER_INPUT_WIDTH, EI_CLASSIFIER_INPUT_HEIGHT);
+    // Print the size of a frame (input data) used for inference on the DSP (Digital Signal Processor)
+    ei_printf("\tFrame size: %d\n", EI_CLASSIFIER_DSP_INPUT_FRAME_SIZE);
+    // Print the number of classes the classifier can detect
+    ei_printf("\tNo. of classes: %d\n", sizeof(ei_classifier_inferencing_categories) / sizeof(ei_classifier_inferencing_categories[0]));
+#endif
+}
